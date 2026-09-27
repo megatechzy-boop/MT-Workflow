@@ -1,0 +1,8 @@
+# Runtime uploads and local secrets
+/uploads/*
+!/uploads/.gitkeep
+*.log
+.env
+.env.*
+config.local.php
+
