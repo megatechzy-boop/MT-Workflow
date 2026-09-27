@@ -12,14 +12,21 @@ const MAIL_FROM = 'noreply@megatechzy.com';
 const OTP_ENABLED = true;
 const ONESIGNAL_APP_ID = '38fbfa89-0e2b-4692-9675-5b07ccaebe4e';
 $onesignalRestApiKey = (string) (getenv('ONESIGNAL_REST_API_KEY') ?: '');
-$onesignalSecretFile = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'client-approval-panel-secrets.php';
+$secretFileCandidates = [
+    dirname(__DIR__) . DIRECTORY_SEPARATOR . 'client-approval-panel-secrets.php',
+    dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'client-approval-panel-secrets.php',
+];
 $smtpUsername = (string) (getenv('SMTP_USERNAME') ?: '');
 $smtpPassword = (string) (getenv('SMTP_PASSWORD') ?: '');
-if (is_file($onesignalSecretFile)) {
-    $onesignalSecrets = require $onesignalSecretFile;
+foreach ($secretFileCandidates as $secretFile) {
+    if (!is_file($secretFile)) {
+        continue;
+    }
+    $onesignalSecrets = require $secretFile;
     $onesignalRestApiKey = $onesignalRestApiKey ?: (string) ($onesignalSecrets['onesignal_rest_api_key'] ?? '');
     $smtpUsername = $smtpUsername ?: (string) ($onesignalSecrets['smtp_username'] ?? '');
     $smtpPassword = $smtpPassword ?: (string) ($onesignalSecrets['smtp_password'] ?? '');
+    break;
 }
 define('SMTP_USERNAME', $smtpUsername);
 define('SMTP_PASSWORD', $smtpPassword);
