@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/megatechzy/workflow.megatechzy.com/
+    - /bin/mkdir -p $DEPLOYPATH $DEPLOYPATH/assets/css $DEPLOYPATH/assets/js $DEPLOYPATH/database $DEPLOYPATH/cron $DEPLOYPATH/uploads
+    - /bin/cp -R access.php activity.php activity_log.php admin_attendance.php admin_content_queue.php admin_content_view.php admin_dashboard.php apply_leave.php approve_content.php assign_task.php auth.php backup_export.php cashflow.php client_content_plan.php client_dashboard.php client_intake_form.php client_report.php company_settings.php config.php content_archive.php content_performance.php db.php download_invoice.php employee_client_report.php employee_clients.php employee_dashboard.php employee_plans.php employee_ui.php expenses.php export_performance.php finance.php finance_dashboard.php finance_report.php index.php internal_notes.php invoices.php leaderboard.php leave_requests.php login.php logout.php manage_clients.php manage_leaves.php manage_users.php master_calendar.php my_invoices.php my_payslip.php my_tasks.php notifications.php payroll.php performance_report.php profile_update_requests.php push_register.php reorder_carousel.php staff_master.php upload_content.php view_client_profile.php OneSignalSDKWorker.js README.md SECURITY_DEPLOYMENT.md $DEPLOYPATH
+    - /bin/cp -R assets/css/. $DEPLOYPATH/assets/css/
+    - /bin/cp -R assets/js/. $DEPLOYPATH/assets/js/
+    - /bin/cp -R database/. $DEPLOYPATH/database/
+    - /bin/cp -R cron/. $DEPLOYPATH/cron/
